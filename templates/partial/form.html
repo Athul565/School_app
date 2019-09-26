@@ -1,0 +1,41 @@
+{% load widget_tweaks %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="uk-fieldset">
+        <div class="uk-grid-divider" uk-grid>
+            {% with WIDGET_ERROR_CLASS='form_error' WIDGET_REQUIRED_CLASS='my_required' %}
+            {% for form_field in form %}
+            <div class="uk-width-1-4@m">
+                <label>
+                    {{form_field.label | title}}{% if form_field.field.required %}*{% endif %}
+                </label>
+                {% if form_field.field.widget.input_type == "select" %}
+                {% render_field form_field class+="uk-select" %}
+                {% elif form_field.field.widget.input_type == "file" %}
+                <div class="width-1-1">
+                    <div uk-form-custom="target: true">
+                        {% render_field form_field %}
+                        <input class="uk-input uk-form-width-medium" type="text" placeholder="Select file" disabled>
+                    </div>
+                </div>
+                {% elif form_field.field.widget.input_type == "checkbox" %}
+                {% render_field form_field class+="uk-checkbox " %}
+                {% else %}
+                {% render_field form_field class+="uk-input" %}
+                {% endif %}
+                <span class="error">{{form_field.errors}}</span>
+            </div>
+            {% endfor %}
+            {% endwith %}
+        </div>
+    </fieldset>
+    <button class="uk-button uk-margin uk-text-bold uk-light" style="background-color: #2F72A4; color: azure">
+        Submit
+    </button>
+</form>
+{% block footer %}
+<script>
+    $('.uk-input').css('text-transform', "uppercase")
+</script>
+    {{ form.media }}
+{% endblock footer %}

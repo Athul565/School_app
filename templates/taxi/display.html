@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <div class="uk-card uk-card-default">
+        <div class="uk-card-body">{% include "partial/table.html" with page_name="Taxi" %}</div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+<style>
+    table {
+        margin: 0 !important;
+    }
+</style>
+{% endblock %}

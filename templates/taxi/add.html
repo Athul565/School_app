@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+{# Don't forget that one ! #}
+{% block title %}
+{% endblock title %}
+{% block container %}
+<div class="uk-card uk-card-default">
+    <div class="uk-card-header">
+        <h3 class="uk-card-title">Add Taxi</h3>
+        <a class="uk-inline uk-button uk-align-right uk-text-bold uk-light"  style="background-color: #2F72A4; color: azure; margin-top: -60px" href="/taxi/">Back</a>
+    </div>
+    <div class="uk-card-body">{% include 'partial/form.html' %}</div>
+</div>
+{% endblock container %}
+
+{% block footer %}
+{{ form.media }}
+<script>
+    $("#id_doctor").parent().hide()
+    $('.uk-input').css('text-transform', "uppercase")
+    $('.uk-input').each(function () {
+        $(this).on('keyup', function () {
+            var val = $(this).val().toUpperCase()
+            $(this).val(val)
+        })
+    })
+</script>
+{% endblock %}
+{% endblock %}

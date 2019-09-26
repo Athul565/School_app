@@ -1,0 +1,19 @@
+{% load widget_tweaks %}
+{% with WIDGET_ERROR_CLASS='uk-form-danger' WIDGET_REQUIRED_CLASS='my_required' %}
+<div class="uk-flex uk-flex-right">
+    <div class="uk-width-1-6@s">
+        {% for form_field in filter.form %}
+        {% if form_field.widget.type == "select" %}
+        {% render_field form_field class+="uk-select uk-form-small" %}
+        {% else %}
+        {% render_field form_field class+="uk-input uk-form-small" placeholder="Search" %}
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="uk-width-auto">
+        <button class="uk-button uk-button-small uk-text-bold uk-light" style="background-color: #2F72A4; color: azure;">
+            <span uk-icon="search"></span>
+        </button>
+    </div>
+</div>
+{% endwith %}

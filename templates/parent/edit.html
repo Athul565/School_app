@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{# Don't forget that one ! #}
+{% block title %}
+Edit Parent
+{% endblock title %}
+{% block container %}
+<div class="uk-card uk-card-default">
+    <div class="uk-card-header">
+        <h3 class="uk-card-title">Edit Parent</h3>
+    </div>
+    <div class="uk-card-body">{% include 'partial/form.html' %}</div>
+</div>
+{% endblock container %}
+
+{% block footer %}
+<script>
+    $('.uk-input').css('text-transform', "uppercase")
+    $('.uk-input').each(function () {
+        $(this).on('keyup', function () {
+            var val = $(this).val().toUpperCase()
+            $(this).val(val)
+        })
+    })
+</script>
+{% endblock %}

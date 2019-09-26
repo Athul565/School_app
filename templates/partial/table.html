@@ -1,0 +1,34 @@
+{% load render_table from django_tables2 %}
+<div class="uk-margin-top">
+  <h3 class="uk-inline">{{page_name}} List</h3>
+  <a class="uk-inline uk-button uk-align-right uk-text-bold uk-light"  style="background-color: #2F72A4; color: azure;" href="?add">Add {{page_name}}</a>
+</div>
+<hr>
+<form action="" method="get" class="uk-margin">
+  {% include "partial/filter_form.html" %}
+</form>
+<div class="uk-overflow-auto">
+  {% render_table table %}
+</div>
+{% block footer %}
+<script>
+  $(".delete-icon").each(function (index, elem) {
+    $(elem).click(function (e) {
+      e.preventDefault();
+      var anchor = elem.parentElement;
+      if (window.confirm("Are you Sure You Want to Delete?")) {
+        $.ajax({
+          url: anchor.href,
+          success: function (data) {
+            window.location.reload(true)
+          },
+          error: function (xhr) {
+            if (xhr.status === 409) alert(
+              `Desired ${xhr.responseText} Can't be deleted, Its already being used..`);
+          }
+        })
+      }
+    });
+  });
+</script>
+{% endblock footer %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Welcome{% endblock %}</title>
+  <!-- Latest compiled and minified CSS -->
+  <!-- UIkit CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.14/css/uikit.min.css" />
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- UIkit JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.14/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.14/js/uikit-icons.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  {% comment %}
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+  <script>tinymce.init({ selector: 'textarea' });</script> {% endcomment %}
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+<style>
+  .nav .a:hover {
+    color: red;
+  }
+</style>
+
+<body>
+  <img src="{% static 'home/images/kingcab.jpg' %}" width="200px">
+  <nav class="uk-navbar" style="background-color: #2F72A4; height: 60px;" uk-navbar="mode: click">
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav">
+        <li class="uk-parent "><a href="/dashboard/">
+            <div class="uk-light uk-text-bold uk-text-meta">Home</div>
+          </a>
+        </li>
+        <li class="uk-parent"><a href="">
+            <div class="uk-light uk-text-bold uk-text-meta">Master</div>
+          </a>
+          <div class="uk-navbar-dropdown">
+            <ul class="uk-nav uk-navbar-dropdown-nav uk-text-bold uk-text-meta">
+              <li><a href="/parent/">Gaurdian</a></li>
+              <li><a href="/student/">Student</a></li>
+              <li><a href="/taxi/">Taxi</a></li>
+              <li><a href="/driver/">Driver</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="uk-parent"><a href="">
+            <div class="uk-light uk-text-bold uk-text-meta">Reports</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="uk-navbar-right">
+
+      <ul class="uk-navbar-nav">
+        {% if user.is_superuser %}
+        <li>
+          <a href="/users/" ratio: 1.5" class="uk-icon-link" style="color: azure">Change Password</a>
+        </li>
+        {% endif %}
+        <li>
+          <a href="/logout/" uk-icon="icon: sign-out; ratio: 1.5" class="uk-icon-link" style="color: azure">Sign Out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  {% block container %}
+
+  {% endblock container %}
+
+</body>
+{% block footer %}
+<script>
+  $('.uk-input').css('text-transform', "uppercase")
+</script>
+{% endblock footer %}
+<link rel="stylesheet" href="{% static 'select2.css' %}" />
+
+</html>
